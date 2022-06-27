@@ -1,0 +1,12 @@
+.App {
+  background: #282828;
+  color: #fbf1c7;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+}
