@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   registerController,
   loginController,
+  deleteController,
   usersController,
 } from "./controllers/auth.controller";
 
@@ -14,6 +15,8 @@ router.get("/", (req, res) => {
 router.post("/register", registerController);
 
 router.post("/login", loginController);
+
+router.delete("/delete", deleteController);
 
 router.get("/users", usersController);
 
