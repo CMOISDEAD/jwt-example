@@ -5,4 +5,4 @@ const connect = () => {
   console.log("Database connected.");
 };
 
-module.exports = connect;
+export default connect;

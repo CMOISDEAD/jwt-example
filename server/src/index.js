@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import dbConnect from "./db/index";
+import connect from "./db/index";
 import routes from "./routes/index";
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(routes);
 
-dbConnect();
+connect();
 
 app.listen(app.get("PORT"), () => {
   console.log(`Server listen on port: ${app.get("PORT")}`);
