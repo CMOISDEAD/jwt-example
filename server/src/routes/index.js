@@ -1,29 +1,20 @@
-const express = require("express");
-const router = express.Router();
-const usersModel = require("../db/user.json");
-const users = usersModel.users;
+import { Router } from "express";
+import {
+  registerController,
+  loginController,
+  usersController,
+} from "./controllers/auth.controller";
 
-// routes
+const router = Router();
+
 router.get("/", (req, res) => {
-  res.send("Server listen on port 8080;");
+  res.send("Server listen on port 8080");
 });
 
-router.post("/login", (req, res) => {
-  const { username, password } = req.body;
+router.post("/register", registerController);
 
-  const userAuth = users.find((user) => user.username === username);
-  const passAuth = userAuth ? userAuth.password === password : false;
+router.post("/login", loginController);
 
-  if (!passAuth) {
-    res.status(401).json({
-      error: "invalid user or password",
-    });
-  } else {
-    res.send({
-      name: userAuth.username,
-      email: userAuth.email,
-    });
-  }
-});
+router.get("/users", usersController);
 
-module.exports = router;
+export default router;

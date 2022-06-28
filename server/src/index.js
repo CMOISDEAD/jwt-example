@@ -1,20 +1,20 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+import express from "express";
+import morgan from "morgan";
+import dbConnect from "./db/index";
+import routes from "./routes/index";
 
-// initialize express
 const app = express();
 
-// config
 app.set("PORT", 8080);
 
-// middlewares
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// routes
-app.use(require("./routes/index"));
+app.use(routes);
 
-// server start
+dbConnect();
+
 app.listen(app.get("PORT"), () => {
   console.log(`Server listen on port: ${app.get("PORT")}`);
 });
