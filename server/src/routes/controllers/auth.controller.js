@@ -62,40 +62,28 @@ export const loginController = async (req, res) => {
   });
 };
 
-export const deleteController = (req, res) => {
+export const deleteController = async (req, res) => {
   const token = req.headers["authorization"];
 
   if (!token) {
-    return res.status(401).json({ error: "Not token provider" });
+    return res.status(401).json({ error: "Not token provided" });
   }
 
-  const { err, result } = jwt.verify(
+  const { err, decoded } = jwt.verify(
     token,
     process.env.JWT_SECRET_KEY,
     (err, decoded) => {
-      return { err: err, result: decoded };
+      return { err, decoded };
     }
   );
-
-  const { id } = result;
 
   if (err) {
     return res.status(401).json({ error: err });
   }
 
-  const userRemove = userModel.findOneAndRemove(id, (err, docs) => {
-    if (err) {
-      return err;
-    } else {
-      console.log(docs._id, id);
-    }
-  });
+  await userModel.findByIdAndDelete(decoded.id);
 
-  if (userRemove) {
-    return res.status(404).json({ error: userRemove });
-  }
-
-  return res.status(202).json({ msg: "User remove succesfully" });
+  return res.status(202).json({ msg: "User removed succesfully" });
 };
 
 export const usersController = async (req, res) => {
