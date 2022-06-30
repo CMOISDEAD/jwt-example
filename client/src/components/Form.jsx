@@ -27,13 +27,32 @@ export const Form = ({ title }) => {
   };
 
   return (
-    <div className="card">
-      <h1>{title}</h1>
-      <p>username: {user}</p>
-      <input type="text" placeholder="user" onChange={toggleUser} />
-      <p>password: {password}</p>
-      <input type="password" placeholder="password" onChange={togglePassword} />
-      <button onClick={handleLogin}>send</button>
+    <div className="text-black">
+      <h3 className="text-center text-2xl">{title}</h3>
+      <form className="mt-7">
+        <h6 className="text-lg">Username</h6>
+        <input
+          type="text"
+          placeholder="username"
+          className="border-2 border-black rounded p-1"
+          onChange={toggleUser}
+        />
+        <h6 className="text-lg">Password</h6>
+        <input
+          type="password"
+          placeholder="password"
+          className="border-2 border-black rounded p-1"
+          onChange={togglePassword}
+        />
+        <div className="text-center mt-10">
+          <button
+            className="w-full bg-sky-600 text-white hover:text-orange-400 hover:bg-sky-700 rounded py-2 px-4"
+            onClick={handleLogin}
+          >
+            send
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
