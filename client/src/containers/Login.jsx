@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Form } from "../components/Form";
 
@@ -8,11 +9,17 @@ const Img = styled.div`
 `;
 
 export const Login = () => {
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    console.log(response);
+  }, [response]);
+
   return (
     <div className="flex flex-row flex-nowrap m-0">
       <Img className="section-text h-screen w-screen"></Img>
       <div className="section-form h-screen bg-white p-10">
-        <Form title="Login" />
+        <Form title="Login" route="login" toggleResponse={setResponse} />
       </div>
     </div>
   );
